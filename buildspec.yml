@@ -3,10 +3,11 @@ phases:
   install:
     commands:
       - npm install
-      - npm run install:lambda
+      - npm install -g mocha
+      - npm install -g serverless
   build:
     commands:
-      - npm run deploy:cicd
-  post_build:
+      - serverless deploy --stage cicd | tee deploy.out
+11  post_build:
     commands:
-      - npm run test:remote
+      - . ./test.sh
